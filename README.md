@@ -6,7 +6,7 @@ Los dibujos pueden importarse o exportarse como BMP<sup>1</sup> o XML<sup>2</sup
 - Las *capas raster* pueden ser importadas desde un archivo BMP<sup>1</sup> o XML<sup>2</sup> y consisten en una matriz de n·m píxeles RGBA(32bpp). Estas capas se pueden desplazar, recortar y modificar pintando los píxeles.
 - Las *capas vector* pueden ser importadas desde un archivo XML<sup>2</sup>, y almacenan las figuras (elipses, segmentos, rectángulos) de manera matemática, no los píxeles.
 
-Las figuras de momento disponibles son:
+Las figuras de momento disponibles con los datos que contienen:
 - Elipses y círculos: dos puntos y un `float` (distancia característica k). Dos puntos para su AABB. Un color de relleno.
 - Segmentos: dos puntos, inicial y final; y un `int` para el grosor en píxeles. Dos puntos para su AABB. Un color de relleno.
 - Rectángulos: Dos puntos, los de su AABB: límite inferior izquierdo y superior derecho. Un color de relleno.
