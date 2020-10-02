@@ -9,7 +9,8 @@ import java.util.Stack;
 
 import dibujo.Lienzo;
 
-public class XML {
+public class XML
+{
     private static final String cabecera = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 
     private static int nivel = 0;
@@ -18,11 +19,13 @@ public class XML {
 
     private Lienzo lienzo;
 
-    public XML(Lienzo lienzo) {
+    public XML(Lienzo lienzo)
+    {
         this.lienzo = lienzo;
     }
 
-    public static String abrir_etiqueta(String nombre) {
+    public static String abrir_etiqueta(String nombre)
+    {
         String s = nombre.replace(' ', '_');
         pila.push(tabs + "</" + s + ">\n");
         String ret = tabs + "<" + s + ">\n";
@@ -33,22 +36,26 @@ public class XML {
         return ret;
     }
 
-    public static String abrir_cerrar_etq(String nombre, Object contenido) {
+    public static String abrir_cerrar_etq(String nombre, Object contenido)
+    {
         String s = nombre.replace(' ', '_');
         return tabs + "<" + s + ">" + contenido + "</" + s + ">\n";
     }
 
-    public static String linea(Object contenido) {
+    public static String linea(Object contenido)
+    {
         return tabs + contenido + "\n";
     }
 
-    public static String cerrar_etiqueta() throws EmptyStackException {
+    public static String cerrar_etiqueta() throws EmptyStackException
+    {
         nivel--;
         tabs = tabs.substring(2);
         return pila.pop();
     }
 
-    public void exportar_archivo(String nombre) throws IOException {
+    public void exportar_archivo(String nombre) throws IOException
+    {
         FileWriter fr = new FileWriter(nombre + ((nombre.endsWith(".xml")) ? "" : ".xml"));
         fr.append(cabecera);
         fr.append(lienzo.etiquetas_xml());
@@ -56,11 +63,11 @@ public class XML {
     }
 
     
-    public static Lienzo importar_archivo(String nombre) throws FileNotFoundException {
+    public static Lienzo importar_archivo(String nombre) throws FileNotFoundException
+    {
         FileReader fr = new FileReader(nombre + ((nombre.endsWith(".xml")) ? "" : ".xml"));
 
         return null;
-
     }
 
 }

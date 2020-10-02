@@ -4,34 +4,36 @@ import java.io.*;
 
 import dibujo.*;
 
-public class BMP {
+public class BMP 
+{
     // al windows le mola el little endian pero java
     // utiliza big endian asi que hay que cambiar de
     // orden los bytes al escribir y despues tambien
     // al leer otra vez
 
     // cabecera BMP (14 bytes)
-    private static final short numero_magico = 0x4d42; // 2 bytes ('B','M' en ASCII)
-    private int tamano_archivo; // 4 bytes (entero sin signo)
-    private static final int reservado = 0x4f43494e; // 4 bytes ('N','I','C','O' en ASCII)
-    private static final int datos_imagen = 0x36; // 4 bytes
+    private static final short numero_magico = 0x4d42;     // 2 bytes ('B','M' en ASCII)
+    private              int   tamano_archivo;             // 4 bytes (entero sin signo)
+    private static final int   reservado =     0x4f43494e; // 4 bytes ('N','I','C','O' en ASCII)
+    private static final int   datos_imagen =  0x36;       // 4 bytes
 
     // cabecera DIB (BITMAPINFOHEADER - 40 bytes)
-    private static final int tamano_cabecera = 0x28; // 4 bytes
-    private int anchura_px; // 4 bytes (entero con signo)
-    private int altura_px; // 4 bytes (entero con signo)
-    private static final short planos_color = 0x1; // 2 bytes
-    private static final short bits_por_pixel = 0x18; // 2 bytes
-    private static final int compresion = 0x0; // 4 bytes
-    private int tamano_imagen; // 4 bytes (entero sin signo)
-    private static final int resolucion_horizontal = 0; // 4 bytes (entero con signo)
-    private static final int resolucion_vertical = 0; // 4 bytes (entero con signo)
-    private static final int colores_paleta = 0x0; // 4 bytes
-    private static final int colores_imp = 0x0; // 4 bytes
+    private static final int   tamano_cabecera =       0x28; // 4 bytes
+    private              int   anchura_px;                   // 4 bytes (entero con signo)
+    private              int   altura_px;                    // 4 bytes (entero con signo)
+    private static final short planos_color =          0x1;  // 2 bytes
+    private static final short bits_por_pixel =        0x18; // 2 bytes
+    private static final int   compresion =            0x0;  // 4 bytes
+    private              int   tamano_imagen;                // 4 bytes (entero sin signo)
+    private static final int   resolucion_horizontal = 0;    // 4 bytes (entero con signo)
+    private static final int   resolucion_vertical =   0;    // 4 bytes (entero con signo)
+    private static final int   colores_paleta =        0x0;  // 4 bytes
+    private static final int   colores_imp =           0x0;  // 4 bytes
 
     private Lienzo lienzo;
 
-    public BMP(Lienzo lienzo) {
+    public BMP(Lienzo lienzo)
+    {
         this.anchura_px = lienzo.getAnchura();
         this.altura_px = lienzo.getAltura();
 
@@ -41,7 +43,8 @@ public class BMP {
         this.lienzo = lienzo;
     }
 
-    public void exportar_archivo(String nombre) throws IOException {
+    public void exportar_archivo(String nombre) throws IOException 
+    {
         FileOutputStream fos = new FileOutputStream(nombre + ((nombre.endsWith(".bmp")) ? "" : ".bmp"));
         BufferedOutputStream bos = new BufferedOutputStream(fos);
         DataOutputStream dos = new DataOutputStream(bos);
@@ -66,7 +69,8 @@ public class BMP {
         Color[][] colores = lienzo.aplanar();
 
         // Datos de color
-        for (int y = 0; y < altura_px; ++y) {
+        for (int y = 0; y < altura_px; ++y)
+        {
             // Escribir fila de pixeles
             for (int x = 0; x < anchura_px; ++x)
                 dos.write(colores[x][y].rgb24bpp());
@@ -79,7 +83,8 @@ public class BMP {
         dos.close();
     }
 
-    public static Color[][] importar_archivo(String nombre) throws IOException {
+    public static Color[][] importar_archivo(String nombre) throws IOException
+    {
         FileInputStream fis = new FileInputStream(nombre + ((nombre.endsWith(".bmp")) ? "" : ".bmp"));
         BufferedInputStream bis = new BufferedInputStream(fis);
         DataInputStream dis = new DataInputStream(bis);
@@ -105,13 +110,16 @@ public class BMP {
         /* bien &= Integer.reverseBytes(dis.readInt()) == colores_paleta; */ dis.readInt();
         /* bien &= Integer.reverseBytes(dis.readInt()) == colores_imp; */ dis.readInt();
 
-        if (bien) {
+        if (bien)
+        {
             Color[][] fondo = new Color[anchura_px][altura_px];
 
             // Datos de color
-            for (int y = 0; y < altura_px; ++y) {
+            for (int y = 0; y < altura_px; ++y)
+            {
                 // Leer fila de pixeles
-                for (int x = 0; x < anchura_px; ++x) {
+                for (int x = 0; x < anchura_px; ++x)
+                {
                     byte b = dis.readByte(), g = dis.readByte(), r = dis.readByte();
                     fondo[x][y] = new Color(r, g, b);
                 }
@@ -120,10 +128,11 @@ public class BMP {
                 for (int p = 0; p < anchura_px % 4; ++p)
                     dis.readByte();
             }
-
             dis.close();
             return fondo;
-        } else {
+        } 
+        else 
+        {
             dis.close();
             return null;
         }

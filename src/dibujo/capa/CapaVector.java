@@ -8,21 +8,26 @@ import otros.Mates;
 import otros.Punto;
 import programa.XML;
 
-public class CapaVector extends Capa {
+public class CapaVector extends Capa 
+{
     private ArrayList<Figura> figuras;
 
-    public CapaVector() {
+    public CapaVector() 
+    {
         figuras = new ArrayList<Figura>();
     }
 
     @Override
-    public void agregar_figura(Figura figura) {
+    public void agregar_figura(Figura figura) 
+    {
         figuras.add(figura);
     }
 
     @Override
-    public void combinar_pixeles(Color[][] fondo) {
-        for (Figura f : figuras) {
+    public void combinar_pixeles(Color[][] fondo) 
+    {
+        for (Figura f : figuras) 
+        {
             int x_f = Mates.minmax(0, f.getLSD().x(), fondo.length - 1),
                 y_f = Mates.minmax(0, f.getLSD().y(), fondo[0].length - 1),
                 x_0 = Mates.minmax(0, f.getLII().x(), fondo.length - 1),
@@ -35,16 +40,15 @@ public class CapaVector extends Capa {
     }
 
     @Override
-    public String etiquetas_xml() {
+    public String etiquetas_xml() 
+    {
         String s = "";
         s += XML.abrir_etiqueta("capaVector");
-
-        for (Figura f : figuras)
-            s += f.etiquetas_xml();
-
+        {
+            for (Figura f : figuras)
+                s += f.etiquetas_xml();
+        }
         s += XML.cerrar_etiqueta();
-
         return s;
     }
-
 }

@@ -1,13 +1,18 @@
 package otros;
 
-public class Mates {
+public class Mates
+{
     // Distancia entre el segmento de extremos r1, r2 y el punto p3
-    public static float distancia_segmento_punto(Punto r1, Punto r2, Punto p3) {
+    public static float distancia_segmento_punto(Punto r1, Punto r2, Punto p3)
+    {
         Punto p1, p2;
-        if (r1.x() < r2.x()) {
+        if (r1.x() < r2.x()) 
+        {
             p1 = r1;
             p2 = r2;
-        } else {
+        } 
+        else 
+        {
             p1 = r2;
             p2 = r1;
         }
@@ -20,10 +25,8 @@ public class Mates {
                 + (x2 * x2 - 2 * x1 * x2 + x1 * x1) * x3)
                 / (y2 * y2 - 2 * y1 * y2 + y1 * y1 + x2 * x2 - 2 * x1 * x2 + x1 * x1);
         float y;
-        if (x2 - x1 != 0)
-            y = -((x1 - x) * y2 + (x - x2) * y1) / (x2 - x1);
-        else
-            y = ((y2 - y1) * y3 + (x2 - x1) * x3 - x * x2 + x * x1) / (y2 - y1);
+        if (x2 - x1 != 0) y = -((x1 - x) * y2 + (x - x2) * y1) / (x2 - x1);
+        else              y = ((y2 - y1) * y3 + (x2 - x1) * x3 - x * x2 + x * x1) / (y2 - y1);
 
         // el punto c es el que se usara para calcular la distancia de p3 al segmento
         // c puede tomar el valor de los extremos del segmento o i (si i esta contenido
@@ -67,7 +70,9 @@ public class Mates {
         return (float) Math.sqrt(xf * xf + yf * yf);
     }
 
-    public static int minmax(int min, int v, int max) {
+    // Si v < min, devuelve min. Si v > max, devuelve max. Si no, devuelve v.
+    public static int minmax(int min, int v, int max)
+    {
         return Math.min(Math.max(v, min), max);
     }
 }

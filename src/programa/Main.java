@@ -8,9 +8,10 @@ import dibujo.capa.CapaRaster;
 import dibujo.figura.*;
 import otros.Punto;
 
-public class Main {
-
-    public static void main(String[] args) throws IOException {
+public class Main
+{
+    public static void main(String[] args) throws IOException
+    {
         // Lienzo lienzo = new Lienzo(BMP.importar_archivo("testrec1"));
         // lienzo.agregar_capa_raster(BMP.importar_archivo("d"));
         //

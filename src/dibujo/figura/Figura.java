@@ -4,17 +4,21 @@ import dibujo.Color;
 import otros.Punto;
 import programa.XML;
 
-public abstract class Figura {
+public abstract class Figura 
+{
     // Color de relleno de la figura
     protected Color color_relleno;
+
     // esquinas de la caja contenedora
     protected Punto lim_sup_der, lim_inf_izq;
 
-    public void setColor(Color color) {
+    public void setColor(Color color)
+    {
         color_relleno = color;
     }
 
-    public Color getColor() {
+    public Color getColor()
+    {
         return color_relleno;
     }
 
@@ -23,20 +27,24 @@ public abstract class Figura {
 
     // Devuelve cierto si y solo si el punto p se encuentra dentro del
     // rectangulo definido por los puntos lim_sup_der y lim_inf_izq
-    public boolean dentro(Punto p) {
+    public boolean dentro(Punto p)
+    {
         return p.x() >= lim_inf_izq.x() && p.x() <= lim_sup_der.x() && p.y() >= lim_inf_izq.y()
                 && p.y() <= lim_sup_der.y();
     }
 
-    public Punto getLSD() {
+    public Punto getLSD()
+    {
         return lim_sup_der;
     }
 
-    public Punto getLII() {
+    public Punto getLII()
+    {
         return lim_inf_izq;
     }
 
-    protected String etiquetas_xml_figura() {
+    protected String etiquetas_xml_figura()
+    {
         String s = "";
         s += XML.abrir_cerrar_etq("color_relleno", color_relleno);
         s += XML.abrir_cerrar_etq("lsd", lim_sup_der);
