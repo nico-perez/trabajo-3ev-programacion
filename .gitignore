@@ -3,3 +3,6 @@
 *.[Bb][Mm][Pp]
 *.[Pp][Nn][Gg]
 *.[Jj][Pp]?([Ee])[Gg]
+
+# Directorio del VS Code
+.vscode
